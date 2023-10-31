@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
-import todo from "../store/modules/todo";
+import moduleToDo from "../store/modules/todo";
+import Todo from "../repository/modules/todo";
 import VuexPersist from "vuex-persist";
 
 const vuexPersist = new VuexPersist({
@@ -11,7 +12,7 @@ const store = createStore({
     modules: {
         todo: {
             namespaced: true,
-            ...todo,
+            ...moduleToDo,
         },
     },
     plugins: [vuexPersist.plugin],
@@ -19,4 +20,10 @@ const store = createStore({
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(store);
+
+    return {
+        provide: {
+            toDo: new Todo(),
+        },
+    };
 });
