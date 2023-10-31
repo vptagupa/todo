@@ -8,3 +8,5 @@ interface Repository {
     deleteAllDone(): any;
     deleteAll(): any;
 }
+
+export { Repository };

@@ -1,4 +1,5 @@
 import { useStore } from "vuex";
+import type { Repository } from "~/types/repository";
 
 class Todo implements Repository {
     store;
