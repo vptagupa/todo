@@ -9,4 +9,4 @@ interface Repository {
     deleteAll(): any;
 }
 
-export { Repository };
+export type { Repository };

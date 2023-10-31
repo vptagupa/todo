@@ -1,4 +1,5 @@
 import type { Tasks, Task } from "~/types/todo";
+
 const Todo = {
     state: (): Tasks => ({
         tasks: [],

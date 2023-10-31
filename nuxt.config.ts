@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { ThemeDefinition } from "vuetify";
+import type { ThemeDefinition } from "vuetify";
 
 const customTheme: ThemeDefinition = {
     colors: {

@@ -26,7 +26,7 @@
                                                     task.status.done,
                                             }"
                                             class="rounded-pill pa-1"
-                                            @click="updateStatus(task.id)"
+                                            @click="toDo.updateStatus(task.id)"
                                         >
                                             <v-icon
                                                 icon="mdi-check"
@@ -43,7 +43,7 @@
                                     size="sm"
                                     variant="flat"
                                     class="pa-1"
-                                    @click="deleteTodo(task.id)"
+                                    @click="toDo.delete(task.id)"
                                 >
                                     <v-icon
                                         color="red"
@@ -68,9 +68,6 @@
 <script setup lang="ts">
 const toDo = useTodo();
 const tasks = computed(() => toDo.getTasks());
-
-const deleteTodo = (id: number) => toDo.delete(id);
-const updateStatus = (id: number) => toDo.updateStatus(id);
 </script>
 
 <style lang="scss" scoped>

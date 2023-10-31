@@ -38,7 +38,7 @@
                 variant="flat"
                 color="red-accent-4"
                 class="rounded-0 mr-1"
-                @click="deleteAllDone"
+                @click="toDo.deleteAllDone()"
             >
                 <v-icon start icon="mdi-delete" size="large"></v-icon>
                 Tasks Done
@@ -48,7 +48,7 @@
                 variant="flat"
                 color="red-accent-4"
                 class="rounded-0"
-                @click="deleteAll"
+                @click="toDo.deleteAll()"
             >
                 <v-icon start icon="mdi-delete" size="large"></v-icon>
                 Tasks
@@ -61,6 +61,4 @@
 const toDo = useTodo();
 const tasksCount = computed(() => toDo.getTaskCount());
 const tasksDoneCount = computed(() => toDo.getTaskDoneCount());
-const deleteAllDone = (id: number) => toDo.deleteAllDone();
-const deleteAll = (id: number) => toDo.deleteAll();
 </script>

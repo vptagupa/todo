@@ -2,10 +2,14 @@ interface Tasks {
     tasks: Array<T>;
 }
 
+interface Status {
+    done: boolean;
+}
+
 interface Task {
     id: number;
     name: string;
-    status: object;
+    status: Status;
 }
 
-export { Tasks, Task };
+export type { Tasks, Task };
