@@ -70,7 +70,7 @@ const updateStatus = (id: number) => toDo.updateStatus(id);
 </script>
 
 <style lang="scss" scoped>
-@use "~/styles/settings";
+@use "~/assets/scss/settings";
 
 .v-list-item {
     border-width: settings.$list-item-border-width !important;

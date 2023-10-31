@@ -34,7 +34,7 @@ const addTodo = () => {
 </script>
 
 <style lang="scss" scoped>
-@use "~/styles/settings";
+@use "~/assets/scss/settings";
 
 .bottom-toolbar {
     background-color: settings.$toolbar-color !important;
