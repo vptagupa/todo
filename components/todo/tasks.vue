@@ -5,11 +5,15 @@
                 <TransitionGroup name="list" tag="v-list-item">
                     <v-list-item
                         class="todo-item rounded-lg ma-2"
-                        :class="{ 'task-done': task.status.done }"
+                        :class="{
+                            'text-decoration-line-through': task.status.done,
+                        }"
                         v-for="(task, index) in tasks"
                         :key="task.id"
                     >
-                        <div class="d-flex justify-space-between">
+                        <div
+                            class="d-flex justify-space-between align-baseline v-item-hover"
+                        >
                             <div>
                                 <div class="d-flex align-baseline">
                                     <div class="mr-5">
@@ -34,11 +38,11 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <div class="list-item-action">
                                 <v-btn
                                     size="sm"
                                     variant="flat"
-                                    class="pa-1 list-item-delete"
+                                    class="pa-1"
                                     @click="deleteTodo(task.id)"
                                 >
                                     <v-icon
@@ -71,7 +75,6 @@ const updateStatus = (id: number) => toDo.updateStatus(id);
 
 <style lang="scss" scoped>
 @use "~/assets/scss/settings";
-
 .v-list-item {
     border-width: settings.$list-item-border-width !important;
     border-color: settings.$list-item-border-color !important;
@@ -81,11 +84,6 @@ const updateStatus = (id: number) => toDo.updateStatus(id);
     min-height: 100px;
     max-height: 300px;
     overflow: auto;
-}
-.task-done {
-    text-decoration-line: line-through;
-    text-decoration-color: #000;
-    transition: text-decoration-line 2s linear;
 }
 
 .list-enter-active,
@@ -102,11 +100,11 @@ const updateStatus = (id: number) => toDo.updateStatus(id);
     opacity: 1;
 }
 
-.list-item-delete {
-    opacity: 0;
+.list-item-action {
+    display: none;
 }
 
-.list-item-delete:hover {
-    opacity: 1;
+.v-item-hover:hover > .list-item-action {
+    display: block;
 }
 </style>
