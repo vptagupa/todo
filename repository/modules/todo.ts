@@ -21,7 +21,6 @@ class Todo implements Repository {
 
     create(task: string): any {
         this.store.commit("todo/create", task);
-        console.log(this.getTaskCount());
     }
 
     delete(id: number): any {
