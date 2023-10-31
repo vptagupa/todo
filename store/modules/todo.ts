@@ -36,6 +36,13 @@ const Todo = {
             state.tasks = [];
         },
     },
+
+    getters: {
+        tasks: (state: any) => state.tasks,
+        taskCount: (state: any) => state.tasks.length,
+        taskDoneCount: (state: any) =>
+            state.tasks.filter((task: any) => task.status.done === true).length,
+    },
 };
 
 export default Todo;

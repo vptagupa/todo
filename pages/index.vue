@@ -59,7 +59,7 @@
                 </v-toolbar>
 
                 <v-card-text>
-                    <v-list lines="one">
+                    <v-list>
                         <v-list-item
                             class="todo-item rounded-lg ma-2"
                             v-for="(task, index) in tasks"
@@ -106,6 +106,12 @@
                                 </div>
                             </div>
                         </v-list-item>
+                        <v-list-item
+                            v-if="tasks.length <= 0"
+                            class="todo-item rounded-lg ma-2"
+                        >
+                            <p>No tasks.</p>
+                        </v-list-item>
                     </v-list>
                 </v-card-text>
 
@@ -116,6 +122,7 @@
                             single-line
                             class="todo-text rounded-pill"
                             v-model="data.task"
+                            @keyup.enter="addTodo"
                         ></v-text-field>
                         <v-btn icon @click="addTodo">
                             <v-icon>mdi-plus</v-icon>
@@ -128,8 +135,6 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from "vuex";
-
 useSeoMeta({
     title: "Todo App",
     ogTitle: "Todo App",
@@ -137,20 +142,21 @@ useSeoMeta({
     ogDescription: "Nuxt todo app",
 });
 
-const data = { task: "" };
-const store = useStore();
-const tasks = computed(() => store.state.todo.tasks);
-const tasksCount = computed(() => store.state.todo.tasks.length);
-const tasksDoneCount = computed(
-    () =>
-        store.state.todo.tasks.filter((task: any) => task.status.done === true)
-            .length
-);
-const addTodo = () => store.commit("todo/create", data.task);
-const deleteTodo = (id: number) => store.commit("todo/delete", id);
-const updateStatus = (id: number) => store.commit("todo/updateStatus", id);
-const deleteAllDone = (id: number) => store.commit("todo/deleteAllDone");
-const deleteAll = (id: number) => store.commit("todo/deleteAll");
+const data = ref({ task: "" });
+const toDo = useTodo();
+const tasks = computed(() => toDo.getTasks());
+const tasksCount = computed(() => toDo.getTaskCount());
+const tasksDoneCount = computed(() => toDo.getTaskDoneCount());
+const addTodo = () => {
+    if (data.value.task) {
+        toDo.create(data.value.task);
+        data.value.task = "";
+    }
+};
+const deleteTodo = (id: number) => toDo.delete(id);
+const updateStatus = (id: number) => toDo.updateStatus(id);
+const deleteAllDone = (id: number) => toDo.deleteAllDone();
+const deleteAll = (id: number) => toDo.deleteAll();
 </script>
 
 <style lang="scss" scoped>
