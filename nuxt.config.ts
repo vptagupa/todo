@@ -3,7 +3,7 @@ import { ThemeDefinition } from "vuetify";
 
 const customTheme: ThemeDefinition = {
     colors: {
-        background: "#00ACC1",
+        background: "#6A1B9A",
     },
 };
 
