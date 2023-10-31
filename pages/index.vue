@@ -11,7 +11,7 @@
             </v-card>
         </v-main>
         <v-footer app name="footer" class="justify-end" color="transparent">
-            <Footer />
+            <SiteInfo />
         </v-footer>
     </v-layout>
 </template>
