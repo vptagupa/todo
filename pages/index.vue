@@ -17,7 +17,7 @@
                             size="x-small"
                             class="ml-2"
                         >
-                            1
+                            {{ tasksCount }}
                         </v-chip>
                     </v-btn>
                     <v-btn
@@ -33,7 +33,7 @@
                             size="x-small"
                             class="ma-1"
                         >
-                            1
+                            {{ tasksDoneCount }}
                         </v-chip>
                     </v-btn>
                     <v-btn
@@ -41,6 +41,7 @@
                         variant="flat"
                         color="red-accent-4"
                         class="rounded-0 mr-1"
+                        @click="deleteAllDone"
                     >
                         <v-icon start icon="mdi-delete"></v-icon>
                         Tasks Done
@@ -50,6 +51,7 @@
                         variant="flat"
                         color="red-accent-4"
                         class="rounded-0"
+                        @click="deleteAll"
                     >
                         <v-icon start icon="mdi-delete"></v-icon>
                         Tasks
@@ -58,7 +60,10 @@
 
                 <v-card-text>
                     <v-list lines="one">
-                        <v-list-item class="todo-item rounded-lg ma-2">
+                        <v-list-item
+                            class="todo-item rounded-lg ma-2"
+                            v-for="(task, index) in tasks"
+                        >
                             <div class="d-flex justify-space-between">
                                 <div>
                                     <div class="d-flex align-baseline">
@@ -66,8 +71,14 @@
                                             <v-btn
                                                 size="sm"
                                                 variant="flat"
-                                                color="success"
+                                                :class="{
+                                                    'bg-success':
+                                                        !task.status.done,
+                                                    'bg-grey-lighten-2':
+                                                        task.status.done,
+                                                }"
                                                 class="rounded-pill pa-1"
+                                                @click="updateStatus(task.id)"
                                             >
                                                 <v-icon
                                                     icon="mdi-check"
@@ -75,7 +86,7 @@
                                                 ></v-icon>
                                             </v-btn>
                                         </div>
-                                        <div>Sample todo 1</div>
+                                        <div>{{ task.name }}</div>
                                     </div>
                                 </div>
 
@@ -85,6 +96,7 @@
                                         variant="flat"
                                         color="red"
                                         class="pa-1"
+                                        @click="deleteTodo(task.id)"
                                     >
                                         <v-icon
                                             icon="mdi-delete"
@@ -103,8 +115,9 @@
                             hide-details
                             single-line
                             class="todo-text rounded-pill"
+                            v-model="data.task"
                         ></v-text-field>
-                        <v-btn icon>
+                        <v-btn icon @click="addTodo">
                             <v-icon>mdi-plus</v-icon>
                         </v-btn>
                     </v-toolbar>
@@ -115,14 +128,29 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from "vuex";
+
 useSeoMeta({
-    title: "My Amazing Site",
-    ogTitle: "My Amazing Site",
-    description: "This is my amazing site, let me tell you all about it.",
-    ogDescription: "This is my amazing site, let me tell you all about it.",
-    ogImage: "https://example.com/image.png",
-    twitterCard: "summary_large_image",
+    title: "Todo App",
+    ogTitle: "Todo App",
+    description: "Nuxt todo app",
+    ogDescription: "Nuxt todo app",
 });
+
+const data = { task: "" };
+const store = useStore();
+const tasks = computed(() => store.state.todo.tasks);
+const tasksCount = computed(() => store.state.todo.tasks.length);
+const tasksDoneCount = computed(
+    () =>
+        store.state.todo.tasks.filter((task: any) => task.status.done === true)
+            .length
+);
+const addTodo = () => store.commit("todo/create", data.task);
+const deleteTodo = (id: number) => store.commit("todo/delete", id);
+const updateStatus = (id: number) => store.commit("todo/updateStatus", id);
+const deleteAllDone = (id: number) => store.commit("todo/deleteAllDone");
+const deleteAll = (id: number) => store.commit("todo/deleteAll");
 </script>
 
 <style lang="scss" scoped>
