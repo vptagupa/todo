@@ -67,6 +67,7 @@
                                     class="todo-item rounded-lg ma-2"
                                     :class="{ 'task-done': task.status.done }"
                                     v-for="(task, index) in tasks"
+                                    :key="task.id"
                                 >
                                     <div class="d-flex justify-space-between">
                                         <div>
@@ -104,13 +105,13 @@
                                             <v-btn
                                                 size="sm"
                                                 variant="flat"
-                                                color="red"
                                                 class="pa-1 list-item-delete"
                                                 @click="deleteTodo(task.id)"
                                             >
                                                 <v-icon
+                                                    color="red"
                                                     icon="mdi-delete"
-                                                    size="sm"
+                                                    size="x-large"
                                                 ></v-icon>
                                             </v-btn>
                                         </div>
@@ -202,7 +203,6 @@ const deleteAll = (id: number) => toDo.deleteAll();
     transition: text-decoration-line 2s linear;
 }
 
-.list-move,
 .list-enter-active,
 .list-leave-active {
     transition: all 0.5s linear;
@@ -210,13 +210,11 @@ const deleteAll = (id: number) => toDo.deleteAll();
 
 .list-enter-from,
 .list-leave-to {
-    top: 0;
     opacity: 0;
-    position: absolute;
 }
 
-.list-leave-active {
-    position: absolute;
+.list-enter-to {
+    opacity: 1;
 }
 
 .list-item-delete {
