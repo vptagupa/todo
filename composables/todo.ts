@@ -1,5 +1,5 @@
 export const useTodo = () => {
-    const { $toDo } = useNuxtApp();
+    const { $vuexToDo } = useNuxtApp();
 
-    return $toDo;
+    return $vuexToDo;
 };

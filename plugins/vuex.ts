@@ -23,7 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     return {
         provide: {
-            toDo: new Todo(),
+            vuexToDo: new Todo(),
         },
     };
 });
