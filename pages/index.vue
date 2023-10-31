@@ -1,6 +1,7 @@
 <template>
     <v-layout>
-        <v-main class="d-flex align-center justify-center">
+        <v-main class="d-flex flex-column align-center justify-center">
+            <h1 class="text-md-h2 mb-3">Vue ToDo List</h1>
             <v-card width="500" theme="light">
                 <TodoHeader />
                 <v-card-text> <TodoTasks /> </v-card-text>
