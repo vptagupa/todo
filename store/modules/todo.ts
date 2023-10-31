@@ -22,6 +22,7 @@ const Todo = {
             state.tasks = state.tasks.map((task: Task) => {
                 if (task.id == id) {
                     task.status = {
+                        ...task.status,
                         done: !task.status.done,
                     };
                 }
