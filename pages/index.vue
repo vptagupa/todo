@@ -4,12 +4,12 @@
             <v-card width="500" theme="light">
                 <TodoHeader />
                 <v-card-text> <TodoTasks /> </v-card-text>
-                <v-card-actions>
+                <v-card-actions class="bg-grey-lighten-3">
                     <TodoFooter />
                 </v-card-actions>
             </v-card>
         </v-main>
-        <v-footer app name="footer" class="justify-end">
+        <v-footer app name="footer" class="justify-end" color="transparent">
             <div
                 class="d-flex align-baseline bg-light-blue-accent-4 rounded-pill"
             >
@@ -26,6 +26,7 @@
                     icon="mdi-close"
                     variant="flat"
                     color="black"
+                    hover
                 ></v-btn>
             </div>
             <Transition name="footer-marquee">

@@ -1,10 +1,11 @@
 <template>
     <v-toolbar class="rounded-pill bottom-toolbar" height="50">
         <v-text-field
-            class="todo-text rounded-pill"
+            class="todo-text rounded-pill px-5 pb-2"
             density="compact"
-            variant="flat"
             label="New Task"
+            flat
+            variant="plain"
             single-line
             hide-details
             v-model="data.task"
